@@ -1,0 +1,11 @@
+spring:
+  codec:
+    max-in-memory-size: 5MB
+
+cmsnesia:
+  api: https://api.cmsnesia.com
+
+github:
+  owner: ''
+  repo: ''
+  accessToken: ''
