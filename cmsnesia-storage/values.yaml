@@ -6,26 +6,15 @@ replicaCount: 1
 
 image:
   repository: ardikars/cmsnesia-storage
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 resources:
  limits:
@@ -34,9 +23,3 @@ resources:
  requests:
    cpu: 10m
    memory: 128Mi
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
