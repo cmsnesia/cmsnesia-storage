@@ -9,7 +9,7 @@ RUN mvn -s .mvn/settings.xml dependency:go-offline
 COPY src /workspace/src
 RUN mvn -s .mvn/settings.xml -e -B clean package -DskipTests
 
-FROM openjdk:11-jdk-alpine
+FROM adoptopenjdk/openjdk11:x86_64-alpine-jre11u-nightly
 #FROM openjdk:8-jre-alpine
 
 LABEL APP="cmsnesia-storeage"
