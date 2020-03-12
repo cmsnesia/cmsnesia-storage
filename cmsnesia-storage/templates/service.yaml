@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "cmsnesia-storage.fullname" . }}
+  labels:
+    {{- include "cmsnesia-storage.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "cmsnesia-storage.selectorLabels" . | nindent 4 }}

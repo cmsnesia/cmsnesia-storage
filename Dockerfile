@@ -22,4 +22,4 @@ WORKDIR /app
 
 COPY --from=builder /workspace/target/cmsnesia-storage-*.jar /app/cmsnesia-storage.jar
 
-ENTRYPOINT ["java", "-jar", "/app/ccmsnesia-storage.jar"]
+ENTRYPOINT ["java", "-jar", "/app/cmsnesia-storage.jar"]
