@@ -17,7 +17,7 @@ jobs:
         run: echo "${{ secrets.mvn_settings_base64 }}" | base64 --decode > .mvn/settings.xml
 
       - name: Build container image
-        run: docker build -t ardikars/cmsnesia-storeage:snapshot .
+        run: docker build -t ardikars/cmsnesia-storage:snapshot .
 
       - name: Docker Login
         env:
@@ -26,4 +26,4 @@ jobs:
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       - name: Push image to Docker Hub
-        run: docker push ardikars/cmsnesia-storeage
+        run: docker push ardikars/cmsnesia-storage

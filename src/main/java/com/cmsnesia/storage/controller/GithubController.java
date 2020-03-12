@@ -24,10 +24,10 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/storeage")
+@RequestMapping(value = "/storage")
 @Api(
-    value = "Github Storeage API",
-    tags = {"Github Storeage API"})
+    value = "Github Storage API",
+    tags = {"Github Storage API"})
 @Slf4j
 public class GithubController {
 

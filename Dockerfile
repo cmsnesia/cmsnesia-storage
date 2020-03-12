@@ -12,14 +12,14 @@ RUN mvn -s .mvn/settings.xml -e -B clean package -DskipTests
 FROM adoptopenjdk/openjdk11:x86_64-alpine-jre11u-nightly
 #FROM openjdk:8-jre-alpine
 
-LABEL APP="cmsnesia-storeage"
-LABEL DOMAIN="cmsnesia-storeage"
+LABEL APP="cmsnesia-storage"
+LABEL DOMAIN="cmsnesia-storage"
 
-RUN addgroup -S cmsnesia && adduser -S cmsnesia-storeage -G cmsnesia
-USER cmsnesia-storeage:cmsnesia
+RUN addgroup -S cmsnesia && adduser -S cmsnesia-storage -G cmsnesia
+USER cmsnesia-storage:cmsnesia
 
 WORKDIR /app
 
-COPY --from=builder /workspace/target/cmsnesia-storeage-*.jar /app/cmsnesia-storeage.jar
+COPY --from=builder /workspace/target/cmsnesia-storage-*.jar /app/cmsnesia-storage.jar
 
-ENTRYPOINT ["java", "-jar", "/app/cmsnesia-storeage.jar"]
+ENTRYPOINT ["java", "-jar", "/app/ccmsnesia-storage.jar"]
