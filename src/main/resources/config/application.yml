@@ -3,7 +3,7 @@ spring:
     max-in-memory-size: 5MB
 
 cmsnesia:
-  api: https://api.cmsnesia.com
+  api: ${cmsnesia:https://api.cmsnesia.com}
 
 github:
   owner: ''
