@@ -1,0 +1,29 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  build:
+    name: Build and push
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout master
+        uses: actions/checkout@master
+
+      - name: Setup Environment
+        run: echo "${{ secrets.mvn_settings_base64 }}" | base64 --decode > .mvn/settings.xml
+
+      - name: Build container image
+        run: docker build -t ardikars/cmsnesia-storage:latest .
+
+      - name: Docker Login
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Push image to Docker Hub
+        run: docker push ardikars/cmsnesia-storage
