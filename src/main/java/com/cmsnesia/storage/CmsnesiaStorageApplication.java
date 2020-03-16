@@ -1,12 +1,12 @@
 package com.cmsnesia.storage;
 
-import org.springframework.boot.SpringApplication;
+import ch.sbb.esta.openshift.gracefullshutdown.GracefulshutdownSpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class CmsnesiaStorageApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(CmsnesiaStorageApplication.class, args);
+    GracefulshutdownSpringApplication.run(CmsnesiaStorageApplication.class, args);
   }
 }
