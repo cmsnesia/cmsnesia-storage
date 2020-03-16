@@ -33,6 +33,9 @@ ingress:
       more_set_headers "X-Content-Type-Options: nosniff";
       more_set_headers "X-Xss-Protection: 1";
       more_set_headers "Referrer-Policy: no-referrer";
+    nginx.ingress.kubernetes.io/auth-method: "POST"
+    nginx.ingress.kubernetes.io/auth-response-headers: "X-User-Data"
+    nginx.ingress.kubernetes.io/auth-url: https://cmsnesia/auth/v1/token/validate
   tls:
     - hosts:
         - "api.cmsnesia.com"
