@@ -11,5 +11,9 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 443
   selector:
     {{- include "cmsnesia-storage.selectorLabels" . | nindent 4 }}

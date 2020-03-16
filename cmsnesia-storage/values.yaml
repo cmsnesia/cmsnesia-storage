@@ -27,7 +27,12 @@ ingress:
     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
-    nginx.ingress.kubernetes.io/cors-allow-headers: "Host, X-Request-ID, X-Read-IP, X-Forwarded-For, X-Forwarded-Host, X-Forwarded-Port, X-Forwarded-Proto, X-Scheme, X-Original-Forwarded-For, Accept-Encoding, CF-IPCountry, CF-RAY, CF-Visitor, user-agent, accept, accept-language, access-control-request-method, access-control-request-headers, referer, origin, CF-Connecting-IP, CDN-Loop, TE, Authorization, Content-Type"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "Host, X-Request-ID, X-Read-IP, X-Forwarded-For, X-Forwarded-Host, X-Forwarded-Port, X-Forwarded-Proto, X-Scheme, X-Original-Forwarded-For, Accept-Encoding, CF-IPCountry, CF-RAY, CF-Visitor, User-Agent, Accept, Accept-Language, Access-Control-Request-Method, Access-Control-Request-Headers, Referer, Origin, CF-Connecting-IP, CDN-Loop, TE, Authorization, Content-Type"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "server: hide";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-Xss-Protection: 1";
+      more_set_headers "Referrer-Policy: no-referrer";
   tls:
     - hosts:
         - "api.cmsnesia.com"
@@ -35,7 +40,7 @@ ingress:
   hosts:
     - host: "api.cmsnesia.com"
       paths:
-        - "/storage(/|$)(.*)"
+        - "/storage/v1(/|$)(.*)"
 
 resources:
  limits:
