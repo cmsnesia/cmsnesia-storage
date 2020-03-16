@@ -6,15 +6,16 @@ on:
 jobs:
 
   build:
-    name: Build and push
+    name: Build and deploy
     runs-on: ubuntu-latest
     steps:
 
       - name: Checkout master
         uses: actions/checkout@master
 
-      - name: Setup Environment
-        run: echo "${{ secrets.mvn_settings_base64 }}" | base64 --decode > .mvn/settings.xml
+      - name: Setup maven environment
+        run: |
+          echo "${{ secrets.mvn_settings_base64 }}" | base64 --decode > .mvn/settings.xml
 
       - name: Build container image
         run: docker build -t ardikars/cmsnesia-storage:snapshot .
@@ -27,3 +28,12 @@ jobs:
 
       - name: Push image to Docker Hub
         run: docker push ardikars/cmsnesia-storage
+
+      - name: Deploy application to development environment
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.kube_config }}" | base64 --decode > ~/.kube/config
+          echo "${{ secrets.helm_development }}" | base64 --decode > cmsnesia-storage/values.yaml
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+          sed -i.bak 's/^\(\s*appVersion\s*:\s*\).*/\1 snapshot/' cmsnesia-storage/Chart.yaml
+          helm upgrade --install cmsnesia-storage cmsnesia-storage -n development
